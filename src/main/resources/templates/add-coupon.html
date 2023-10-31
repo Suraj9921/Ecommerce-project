@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    /* Custom navbar style */
+    .custom-navbar {
+      background-color: transparent; /* Remove the background color */
+    }
+
+    .custom-navbar .navbar-brand {
+      color: #333; /* Change to your desired text color */
+    }
+
+    .custom-navbar .navbar-toggler-icon {
+      background-color: #333; /* Change to your desired icon color */
+    }
+
+    .custom-navbar .navbar-nav .nav-link {
+      color: #333; /* Change to your desired text color */
+    }
+
+    /* Center the page content */
+    .page-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh; /* Adjust to center content vertically */
+    }
+
+    /* Style the "Add Product" button */
+    .add-product-btn {
+      margin: 20px 0;
+    }
+
+    /* Style the table */
+    .table {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px #888888;
+    }
+
+    /* Style table headers */
+    .table thead {
+      background-color: #f8f9fa; /* Change to your desired header background color */
+    }
+
+    /* Style table cells */
+    .table tbody td {
+      vertical-align: middle;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img th:src="@{/images/logo.jpg}" src="../static/images/logo.jpg" width="auto" height="60"
+           class="d-inline-block align-top" alt=""/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/admin}" href="#">Admin-Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/logout}" href="#">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="main-wrap mb-50">
+
+  <div class="container mt-10 p-30">
+    <!--    <div th:if="${error}" class="alert alert-danger">-->
+    <!--      <strong th:text="${'Coupon ' + couponCode + ' already exist!'}">Danger!</strong>-->
+    <!--    </div>-->
+
+    <h2 class="mt-2">Create Coupon</h2>
+    <form th:action="@{/coupons/save}" th:object="${coupon}"  method="post">
+
+
+      <div class="col-md-4">
+        <label for="CouponCode" class="form-label">Code</label>
+        <input  name="code" class="form-control" id="CouponCode" required>
+      </div>
+
+      <div class="col-md-4">
+        <label for="CouponDescription" class="form-label">Description</label>
+        <input name="description"   required class="form-control" id="CouponDescription">
+      </div>
+
+      <div class="col-md-4">
+        <label for="CouponOff" class="form-label">Percentage Off</label>
+        <input type="number" name="offPercentage" class="form-control" id="CouponOff" required>
+      </div>
+
+
+      <div class="col-md-4">
+        <label for="CouponMax" class="form-label">Max Off</label>
+        <input type="number" name="maxOff" class="form-control" id="CouponMax" required>
+
+      </div>
+
+
+      <div class="col-md-4">
+        <label for="CouponDate" class="form-label">Expiry Date</label>
+        <input type="date" name="expiryDate" class="form-control" id="CouponDate" required>
+      </div>
+
+
+      <div class="col-md-4">
+        <label for="CouponCount" class="form-label">Count</label>
+        <input type="number" name="count" class="form-control" id="CouponCount" required>
+      </div>
+
+
+
+      <!--      <div class="col-md-4">-->
+      <!--        <label for="CouponType" class="form-label">Type</label>-->
+      <!--        <select onchange="typeSelection()" class= "form-control" id="CouponType" name="couponType">-->
+      <!--          <option th:value="null" >Select Option</option>-->
+      <!--          <option  th:value="product">Product</option>-->
+      <!--          <option  th:value="category">Category</option>-->
+      <!--        </select>-->
+
+      <!--      </div>-->
+
+      <!--      <div class="col-md-4" id="proList" hidden>-->
+      <!--        <label for="CouponProducts" class="form-label">Product</label>-->
+      <!--        <select id="CouponProducts" name="applicableFor" class="form-control">-->
+      <!--          <option selected disabled value="">Select a product</option>-->
+      <!--          <th:block th:each="product : ${products}">-->
+      <!--            <option th:value="${product.id}" th:text="${product.name}"></option>-->
+      <!--          </th:block>-->
+      <!--        </select>-->
+      <!--      </div>-->
+
+      <!--      <div  class="col-md-4" id="catList" hidden>-->
+      <!--        <label for="CouponCategory" class="form-label">Category</label>-->
+      <!--        <select id="CouponCategory" name="applicableFor" class="form-control">-->
+      <!--          <option selected value="">Select a category</option>-->
+      <!--          <th:block th:each="category : ${categories}">-->
+      <!--            <option th:value="${category.id}" th:text="${category.name}"></option>-->
+      <!--          </th:block>-->
+      <!--        </select>-->
+      <!--      </div>-->
+
+
+      <div class="col-12 mt-25">
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+
+  </div>
+
+
+
+</main>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

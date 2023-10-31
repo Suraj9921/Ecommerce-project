@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
+
+    <style>
+        /* Center-align table headings */
+        .table_head th {
+            text-align: center;
+        }
+
+        /* Center the content within the container */
+        .login_form_inner {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style the radio button list */
+        .address-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px; /* Adjust the width as needed */
+            text-align: right;
+        }
+
+        input {
+            width: 200px; /* Adjust the width as needed */
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+
+        .address-list label {
+            display: block;
+            margin: 10px 0;
+            text-align: left; /* Left-align the address labels */
+        }
+
+        /* Center the content within the container */
+        .login_form_inner {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style the form inputs */
+        .login_form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Style the submit button */
+        .login_form button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login_form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Center the content within the container */
+        .login_form_inner {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style the select dropdown */
+        .login_form select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Style the total price */
+        .login_form h3 {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        /* Style the submit button */
+        .login_form button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login_form button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+
+</head>
+<body class="animsition">
+
+<!-- Header -->
+<header class="header-v4">
+    <!-- Header desktop -->
+    <div class="container-menu-desktop">
+        <!-- Topbar -->
+        <div class="top-bar">
+            <div class="content-topbar flex-sb-m h-full container">
+                <div class="left-top-bar">
+                    Free shipping for standard order over $100
+                </div>
+
+                <div class="right-top-bar flex-w h-full">
+                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        Help & FAQs
+                    </a>
+
+                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        My Account
+                    </a>
+
+                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        EN
+                    </a>
+
+                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                        USD
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrap-menu-desktop how-shadow1">
+            <nav class="limiter-menu-desktop container">
+
+                <!-- Logo desktop -->
+                <a href="#" class="logo">
+                    <img src="/images/icons/logo-01.png" alt="IMG-LOGO">
+                </a>
+
+                <!-- Menu desktop -->
+                <div class="menu-desktop">
+                    <ul class="main-menu">
+                        <li class="active-menu">
+                            <a th:href="@{/}">Home</a>
+                            <!--								<ul class="sub-menu">-->
+                            <!--									<li><a href="index.html">Homepage 1</a></li>-->
+                            <!--									<li><a href="home-02.html">Homepage 2</a></li>-->
+                            <!--									<li><a href="home-03.html">Homepage 3</a></li>-->
+                            <!--								</ul>-->
+                        </li>
+
+                        <li>
+                            <a th:href="@{/shop}">Shop</a>
+                        </li>
+
+                        <!--							<li class="label1" data-label1="hot">-->
+                        <!--								<a href="shoping-cart.html">Features</a>-->
+                        <!--							</li>-->
+
+                        <!--							<li>-->
+                        <!--								<a href="blog.html">Blog</a>-->
+                        <!--							</li>-->
+
+                        <li>
+                            <a th:href="@{/about}" href="#">About</a>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/contact}">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Icon header -->
+                <div class="wrap-icon-header flex-w flex-r-m">
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                        <i class="zmdi zmdi-search"></i>
+                    </div>
+
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
+
+                    <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                        <i class="zmdi zmdi-favorite-outline"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Header Mobile -->
+    <div class="wrap-header-mobile">
+        <!-- Logo moblie -->
+        <div class="logo-mobile">
+            <a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+        </div>
+
+        <!-- Icon header -->
+        <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+                <i class="zmdi zmdi-search"></i>
+            </div>
+
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+                <i class="zmdi zmdi-shopping-cart"></i>
+            </div>
+
+            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+                <i class="zmdi zmdi-favorite-outline"></i>
+            </a>
+        </div>
+
+        <!-- Button show menu -->
+        <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+        </div>
+    </div>
+
+
+    <!-- Menu Mobile -->
+    <div class="menu-mobile">
+        <ul class="topbar-mobile">
+            <li>
+                <div class="left-top-bar">
+                    Free shipping for standard order over $100
+                </div>
+            </li>
+
+            <li>
+                <div class="right-top-bar flex-w h-full">
+                    <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        Help & FAQs
+                    </a>
+
+                    <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        My Account
+                    </a>
+
+                    <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        EN
+                    </a>
+
+                    <a href="#" class="flex-c-m p-lr-10 trans-04">
+                        USD
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="main-menu-m">
+            <li>
+                <a href="index.html">Home</a>
+                <ul class="sub-menu-m">
+                    <li><a href="index.html">Homepage 1</a></li>
+                    <li><a href="home-02.html">Homepage 2</a></li>
+                    <li><a href="home-03.html">Homepage 3</a></li>
+                </ul>
+                <span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+            </li>
+
+            <li>
+                <a href="shop.html">Shop</a>
+            </li>
+
+            <li>
+                <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+            </li>
+
+            <li>
+                <a href="blog.html">Blog</a>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+            </li>
+
+            <li>
+                <a href="contact.html">Contact</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Modal Search -->
+    <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+        <div class="container-search-header">
+            <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+                <img src="images/icons/icon-close2.png" alt="CLOSE">
+            </button>
+
+            <form class="wrap-search-header flex-w p-l-15">
+                <button class="flex-c-m trans-04">
+                    <i class="zmdi zmdi-search"></i>
+                </button>
+                <input class="plh3" type="text" name="search" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</header>
+
+<!-- Cart -->
+
+
+<!-- breadcrumb -->
+    <div class="container">
+            <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+                <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+                    Home
+                    <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                </a>
+
+            <span class="stext-109 cl4">
+				Checkout
+			</span>
+            </div>
+    </div>
+
+
+<!-- Checkout -->
+<div class="container mt-5">
+    <div class="col-lg-6 text-center" style="margin: auto">
+        <div class="login_form_inner my-custom-form">
+            <form th:action="@{/checkout/addAddress}" method="post">
+                <h1 class="text-center">Select an Address</h1>
+                <label>
+                    <ul>
+                        <li th:each="address : ${user.addresses}">
+                            <input type="radio" name="selectedAddress" th:value="${address.id}">
+                            <label>
+                                <span th:text="${address.house_no} + ',' + ${address.street} + ',' + ${address.state} + ',' + ${address.country}"></span>
+                             </label>
+                            <br>
+                        </li>
+                    </ul>
+                </label>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-lg-6 text-center" style="margin: auto">
+        <div class="login_form_inner">
+            <h1>Add a new address</h1>
+            <form class="row login_form row justify-content-center" th:action="@{/checkout/addAddress}" method="post" >
+                <div>
+                    <input required type="text" name="house_no" placeholder="House No.">
+                </div>
+                <div>
+                    <input required type="text" name="street" placeholder="Street">
+                </div>
+                <div>
+                    <input required type="text" name="state" placeholder="State">
+                </div>
+                <div>
+                    <input required type="number" name="postalcode" placeholder="Postal Code">
+                </div>
+                <div>
+                    <input required type="text" name="country" placeholder="Country">
+                </div>
+                <button type="submit">Add New Address</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-lg-6 text-center" style="margin: auto">
+        <div class="login_form_inner">
+            <label for="couponCode">Coupon Code:</label>
+            <input type="text" id="couponCode" name="couponCode">
+            <button type="button" onclick="applyCoupon()">Apply Coupon</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-lg-6 text-center" style="margin: auto">
+        <div class="login_form_inner">
+            <!--            <h1>Verify OTP</h1>-->
+            <h1>Payment Details</h1>
+            <form class="row login_form justify-content-center mt-2" th:action="@{/checkout/confirmOrder}" method="post" onsubmit="return handlePayment()">
+                <div>
+                    <label for="paymentMethod" style="display: inline;">Select Payment Method:</label>
+                    <select name="paymentMethod" id="paymentMethod" th:value="${paymentMethod}" style="display: inline;">
+                        <option value="cashOnDelivery">Cash on Delivery</option>
+                        <option value="payNow">Razor Pay</option>
+                    </select>
+                </div>
+
+<!--                <div class="coupon col-lg-4">-->
+<!--                    <div class="col-lg-4 mb-25">-->
+<!--                        <h5>Coupon</h5>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <select name="couponId" id="couponId" onchange="applyCoupon()" th:field="*{coupons}" class="form-control">-->
+<!--                            <option value="0">No Coupon</option>-->
+<!--                            <option th:each="coupon : ${coupons}"-->
+<!--                                    th:value="${coupon.id}"-->
+<!--                                    th:text="${coupon.code}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+                <div >
+                    <h3> The total price of cart is ₹ <span id="total_price" th:text="${totalprice}"></span></h3>
+                </div>
+                <div>
+                    <button type="submit">Confirm and Place Order</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg3 p-t-75 p-b-32">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-lg-3 p-b-50">
+                <h4 class="stext-301 cl0 p-b-30">
+                    Categories
+                </h4>
+
+                <ul>
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Women
+                        </a>
+                    </li>
+
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Men
+                        </a>
+                    </li>
+
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Shoes
+                        </a>
+                    </li>
+
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Watches
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-lg-3 p-b-50">
+                <h4 class="stext-301 cl0 p-b-30">
+                    Help
+                </h4>
+
+                <ul>
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Track Order
+                        </a>
+                    </li>
+
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Returns
+                        </a>
+                    </li>
+
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            Shipping
+                        </a>
+                    </li>
+
+                    <li class="p-b-10">
+                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            FAQs
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-6 col-lg-3 p-b-50">
+                <h4 class="stext-301 cl0 p-b-30">
+                    GET IN TOUCH
+                </h4>
+
+                <p class="stext-107 cl7 size-201">
+                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                </p>
+
+                <div class="p-t-27">
+                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+
+                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+
+                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <i class="fa fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3 p-b-50">
+                <h4 class="stext-301 cl0 p-b-30">
+                    Newsletter
+                </h4>
+
+                <form>
+                    <div class="wrap-input1 w-full p-b-4">
+                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+                        <div class="focus-input1 trans-04"></div>
+                    </div>
+
+                    <div class="p-t-18">
+                        <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="p-t-40">
+            <div class="flex-c-m flex-w p-b-18">
+                <a href="#" class="m-all-1">
+                    <img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+                </a>
+            </div>
+
+            <p class="stext-107 cl6 txt-center">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Back to top -->
+<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    function handlePayment() {
+        const paymentMethod = document.getElementById("paymentMethod").value;
+        console.log(" " +paymentMethod);
+        if (paymentMethod === "payNow") {
+            console.log("payment method is payNOw");
+            initiateRazorpayPayment();
+            return false;
+        }
+        return true;
+    }
+
+    function confirmOrder(razorpay_payment_id) {
+        console.log("Inside confirmOrder");
+        $.ajax({
+            url: '/checkout/confirmOrder',
+            type: 'POST',
+            data: {
+                paymentMethod: 'payNow',
+                paymentId: razorpay_payment_id
+            },
+            success: function (data) {
+                console.log('Order confirmed successfully:', data);
+                // window.location.href = '/OrderConfirmed.html';
+            },
+            error: function (error) {
+                console.error('Error confirming order:', error);
+                alert('Error confirming order');
+            }
+        });
+    }
+
+    function initiateRazorpayPayment() {
+        console.log("Initiate razorpay pay payNOw");
+        let amount = parseFloat($('#total_price').text());
+        console.log(amount)
+        if(amount =='' || amount == null ){
+            alert("Amount is null, your cart empty");
+            return;
+        }
+        $.ajax(
+            {
+                url:'/payNow',
+                data : JSON.stringify({amount : amount,info:'order_request'}),
+                contentType : 'application/json',
+                type:'POST',
+                dataType:'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('[name="_csrf"]').attr('content')
+                },
+                success:function (response){
+                    console.log(response)
+                    if (response.status === "created"){
+                        let options ={
+                            key:'rzp_test_p5dhh6XFv0f6Rs',
+                            amount:response.amount,
+                            currency:'INR',
+                            name:'Coza Store',
+                            description:'Pay for your order',
+                            image:"https://th.bing.com/th/id/OIP.ESB8d5xKbiIXELiU9EIjAQHaBk?pid=ImgDet&rs=1",
+                            order_id:response.id,
+                            handler:function (response){
+                                console.log(response.razorpay_payment_id)
+                                console.log(response.razorpay_order_id)
+                                console.log(response.razorpay_signature)
+                                console.log('payment successful')
+                                console.log('Calling confirmOrder');
+                                confirmOrder(response.razorpay_payment_id);
+                                alert("Congrats, Payment is successful!!")
+                            },
+                            prefill:{
+                                name:"Suraj S",
+                                email:"suraj14o99@gmail.com",
+                                contact:"8086027483",
+                            },
+                            notes:{
+                                address: "Coza Store"
+                            },
+                            theme:{
+                                color:"#3399cc"
+                            }
+                        }
+                        let rzp = new Razorpay(options);
+                        rzp.open();
+                    }
+                },
+                error:function (error){
+                    console.log(error)
+                    alert("something went wrong")
+                }
+
+            }
+        )
+    }
+
+    let couponApplied = false;
+    function applyCoupon() {
+        if (couponApplied) {
+            alert('Only one coupon can be applied per transaction.');
+            return;
+        }
+        const couponCode = document.getElementById('couponCode').value;
+        const totalPrice = parseFloat(document.getElementById('total_price').innerText);  // Get total price from the DOM
+        const endpoint = `/coupons/validate/${couponCode}?totalPrice=${totalPrice}`;  // Include totalPrice as a query parameter
+        console.log(couponCode)
+        console.log(totalPrice)
+        console.log("Inside apply Coupon");
+
+        fetch(endpoint)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data >= 0) {
+                    const totalPriceElement = document.getElementById('total_price');
+                    const discountedPrice = totalPrice - ((data / 100) * totalPrice);
+                    totalPriceElement.innerText = discountedPrice;
+                    couponApplied = true
+                    showToast();
+                    // alert('Coupon applied succesfully');
+                } else {
+                    alert('Invalid coupon code. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    // function verifyPayment(payment){
+    //     $.ajax({
+    //         url:'',
+    //         method: 'post',
+    //         data:JSON.stringify(payment),
+    //         contentType: 'application/json',
+    //         dataType:'json',
+    //         success:(response)=>{
+    //             if(response.status){
+    //                 alert("congrats!! Payment successful");
+    //                 location.href='/'
+    //             } else{
+    //                 alert("Payment failed!")
+    //             }
+    //         }
+    //     });
+    // }
+
+</script>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<script>
+    $(".js-select2").each(function(){
+        $(this).select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $(this).next('.dropDownSelect2')
+        });
+    })
+</script>
+<!--===============================================================================================-->
+<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<!--<script>-->
+<!--    function applyCoupon(){-->
+<!--        let couponId = document.getElementById("couponId").value;-->
+
+<!--        var finalAmount = document.getElementById("finalAmount");-->
+<!--        let cartTotal = document.getElementById("cartTotal").value;-->
+<!--        if(couponId>0){-->
+<!--            //calculate cartTotal-->
+<!--            $.ajax({-->
+<!--                url:'/user_home/coupon/checkCartAmount',-->
+<!--                data:JSON.stringify({"cartTotal":cartTotal,"couponId":couponId}),-->
+<!--                contentType:'application/json',-->
+<!--                type:'POST',-->
+<!--                dataType:'json',-->
+<!--                success:function(response){-->
+<!--                    console.log(response);-->
+<!--                    finalAmount.value=response-->
+<!--                },error:function(error){-->
+<!--                    console.log(error);-->
+<!--                }-->
+<!--            });-->
+
+<!--        }else{-->
+<!--            alert("No coupon selected");-->
+<!--            finalAmount.value=cartTotal;-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<script>
+    $('.js-pscroll').each(function(){
+        $(this).css('position','relative');
+        $(this).css('overflow','hidden');
+        var ps = new PerfectScrollbar(this, {
+            wheelSpeed: 1,
+            scrollingThreshold: 1000,
+            wheelPropagation: false,
+        });
+
+        $(window).on('resize', function(){
+            ps.update();
+        })
+    });
+</script>
+<!--===============================================================================================-->
+<script src="js/main.js"></script>
+
+</body>
+</html>
