@@ -128,7 +128,7 @@ public class ShoppingCartController {
         model.addAttribute("addresses",addresses);
         model.addAttribute("totalprice", totalprice);
         model.addAttribute("paymentMethod", "CashOnDelivery");
-        return "checkout";
+        return "checkout2";
     }
 
 //    @RequestMapping(value = "/check-out/apply-coupon", method = RequestMethod.POST, params = "action=apply")
