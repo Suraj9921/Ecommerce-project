@@ -580,25 +580,19 @@
                     <h3>Add new Address</h3>
                     <form class="row contact_form" th:action="@{/checkout/addAddress}" method="post" novalidate="novalidate">
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="street" name="street" placeholder="Street">
+                            <input required type="text" class="form-control" name="house_no" placeholder="House No.">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="line1" name="line1" placeholder="Address Line 1">
+                            <input required type="text" class="form-control" name="street" placeholder="Street">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="line2" name="line2" placeholder="Address Line 2">
+                            <input required type="text" class="form-control" name="state" placeholder="State">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="state" name="state" placeholder="State">
+                            <input required type="number" class="form-control" name="postalcode" placeholder="Postal Code">
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="postalcode" name="postalcode" placeholder="Postal Code">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="country" name="country" placeholder="Country">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <button type="submit" class="btn btn-primary">Add Address</button>
+                            <input required type="text" class="form-control" name="country" placeholder="Country">
                         </div>
                     </form>
                 </div>
