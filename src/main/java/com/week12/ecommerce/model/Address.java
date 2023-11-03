@@ -11,7 +11,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
 
-    @NotBlank(message = "Should not be blank")
     private String house_no;
     @NotBlank(message = "Should not be blank")
     private String street;
