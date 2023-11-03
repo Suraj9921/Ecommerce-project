@@ -35,7 +35,7 @@ public class AdminController {
     @Autowired
     ProductService productService;
 
-    public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
+    public static String uploadDir = System.getProperty("user.dir") + "/home/ubuntu/Ecommerce-project/target/src/main/resources/static/productImages";
 
     @GetMapping("/admin")
     public String adminHome(){
