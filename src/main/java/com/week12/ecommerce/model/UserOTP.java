@@ -24,7 +24,7 @@ public class UserOTP {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "One-time password cannot be blank")
+//    @NotBlank(message = "One-time password cannot be blank")
     private String oneTimePassword;
 
     @Temporal(TemporalType.TIMESTAMP)

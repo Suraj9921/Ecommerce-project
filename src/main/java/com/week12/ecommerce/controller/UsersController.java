@@ -56,13 +56,14 @@ public class UsersController {
                 newUser.setUpdateOn(new Date());
                 usersService.saveOrUpdate(newUser);
                 UserOTP userOTP = userOTPService.findByEmail(newUser.getEmail());
-                if(userOTP!=null){
+                if (userOTP != null) {
                     userOTP.setOneTimePassword(null);
-                    userOTP.setOtpRequestedTime(null);
-                    userOTP.setUpdateOn(new Date());
+                    userOTP.setOtpRequestedTime(new Date()); // Set the current timestamp
+                    userOTP.setUpdateOn(new Date()); // Set the current timestamp
                     userOTPService.saveOrUpdate(userOTP);
                 }
-                httpSession.setAttribute("message","OTP is send to registered email.Please enter the Message within 5 minutes");
+//                httpSession.setAttribute("message","OTP is send to registered email.Please enter the Message within 5 minutes");
+                httpSession.setAttribute("message","You have successfully registered. Try to login");
                 return "redirect:/signup?sendEmailOtp";
             }catch (Exception e){
                 e.printStackTrace();
