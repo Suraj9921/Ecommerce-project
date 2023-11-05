@@ -30,126 +30,74 @@
     <!--===============================================================================================-->
 
     <style>
-        /* Center-align table headings */
-        .table_head th {
-            text-align: center;
+        /* Style the breadcrumb section */
+        .bread-crumb {
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
         }
 
-        /* Center the content within the container */
+        .stext-109 {
+            color: #333;
+        }
+
+        /* Style the Checkout sections */
         .login_form_inner {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
             background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Style the radio button list */
-        .address-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        label {
-            display: inline-block;
-            width: 100px; /* Adjust the width as needed */
-            text-align: right;
-        }
-
-        input {
-            width: 200px; /* Adjust the width as needed */
-            padding: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-
-
-        .address-list label {
-            display: block;
-            margin: 10px 0;
-            text-align: left; /* Left-align the address labels */
-        }
-
-        /* Center the content within the container */
-        .login_form_inner {
-            text-align: center;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
         }
 
-        /* Style the form inputs */
-        .login_form input {
+        .login_form_inner h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .login_form_inner label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .login_form_inner input[type="text"],
+        .login_form_inner input[type="number"],
+        .login_form_inner select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 3px;
         }
 
-        /* Style the submit button */
-        .login_form button {
-            background-color: #007BFF;
+        .login_form_inner button {
+            background-color: #333;
             color: #fff;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 3px;
             cursor: pointer;
         }
 
-        .login_form button:hover {
-            background-color: #0056b3;
+        .login_form_inner button:hover {
+            background-color: #555;
         }
 
-        /* Center the content within the container */
-        .login_form_inner {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Style the select dropdown */
-        .login_form select {
+        /* Style the Payment Details section */
+        #paymentMethod {
             width: 100%;
             padding: 10px;
-            margin: 5px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 3px;
+            margin-top: 5px;
         }
 
-        /* Style the total price */
-        .login_form h3 {
-            margin: 15px 0;
+        #total_price {
+            color: #333;
             font-size: 18px;
+            font-weight: bold;
         }
-
-        /* Style the submit button */
-        .login_form button {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .login_form button:hover {
-            background-color: #0056b3;
-        }
-
     </style>
 
 </head>
@@ -405,6 +353,7 @@
             <h1>Add a new address</h1>
             <form class="row login_form row justify-content-center" th:action="@{/checkout/addAddress}" method="post" >
                 <div>
+                <div>
                     <input required type="text" name="house_no" placeholder="House No.">
                 </div>
                 <div>
@@ -420,6 +369,7 @@
                     <input required type="text" name="country" placeholder="Country">
                 </div>
                 <button type="submit">Add New Address</button>
+                </div>
             </form>
         </div>
     </div>
@@ -441,34 +391,38 @@
             <!--            <h1>Verify OTP</h1>-->
             <h1>Payment Details</h1>
             <form class="row login_form justify-content-center mt-2" th:action="@{/checkout/confirmOrder}" method="post" onsubmit="return handlePayment()">
+
                 <div>
-                    <label for="paymentMethod" style="display: inline;">Select Payment Method:</label>
-                    <select name="paymentMethod" id="paymentMethod" th:value="${paymentMethod}" style="display: inline;">
-                        <option value="cashOnDelivery">Cash on Delivery</option>
-                        <option value="payNow">Razor Pay</option>
-                    </select>
-                </div>
+                    <div>
+                        <label for="paymentMethod" style="display: inline;">Select Payment Method:</label>
+                        <select name="paymentMethod" id="paymentMethod" th:value="${paymentMethod}" style="display: inline;">
+                            <option value="cashOnDelivery">Cash on Delivery</option>
+                            <option value="payNow">Razor Pay</option>
+                            <option value="Wallet">Wallet Pay</option>
+                        </select>
+                    </div>
 
-<!--                <div class="coupon col-lg-4">-->
-<!--                    <div class="col-lg-4 mb-25">-->
-<!--                        <h5>Coupon</h5>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <select name="couponId" id="couponId" onchange="applyCoupon()" th:field="*{coupons}" class="form-control">-->
-<!--                            <option value="0">No Coupon</option>-->
-<!--                            <option th:each="coupon : ${coupons}"-->
-<!--                                    th:value="${coupon.id}"-->
-<!--                                    th:text="${coupon.code}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <!--                <div class="coupon col-lg-4">-->
+                    <!--                    <div class="col-lg-4 mb-25">-->
+                    <!--                        <h5>Coupon</h5>-->
+                    <!--                    </div>-->
+                    <!--                    <div>-->
+                    <!--                        <select name="couponId" id="couponId" onchange="applyCoupon()" th:field="*{coupons}" class="form-control">-->
+                    <!--                            <option value="0">No Coupon</option>-->
+                    <!--                            <option th:each="coupon : ${coupons}"-->
+                    <!--                                    th:value="${coupon.id}"-->
+                    <!--                                    th:text="${coupon.code}"></option>-->
+                    <!--                        </select>-->
+                    <!--                    </div>-->
 
-<!--                </div>-->
+                    <!--                </div>-->
 
-                <div >
-                    <h3> The total price of cart is ₹ <span id="total_price" th:text="${totalprice}"></span></h3>
-                </div>
-                <div>
-                    <button type="submit">Confirm and Place Order</button>
+                    <div class="mt-2">
+                        <h5> The total price of cart is ₹ <span id="total_price" th:text="${totalprice}"></span></h5>
+                    </div>
+                    <div class="mt-2">
+                        <button type="submit">Confirm and Place Order</button>
+                    </div>
                 </div>
 
             </form>
