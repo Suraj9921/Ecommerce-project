@@ -2,10 +2,12 @@ package com.week12.ecommerce.controller;
 
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
+import com.week12.ecommerce.enums.TransactionType;
 import com.week12.ecommerce.model.*;
 import com.week12.ecommerce.service.AddressService;
 import com.week12.ecommerce.service.ProductService;
 import com.week12.ecommerce.service.UsersSevice;
+import com.week12.ecommerce.service.WalletService;
 import com.week12.ecommerce.serviceimpl.OrderServiceImpl;
 import com.week12.ecommerce.serviceimpl.ShoppingCartServiceImpl;
 import com.week12.ecommerce.serviceimpl.UsersSeviceImpl;
@@ -40,6 +42,9 @@ public class ShoppingCartController {
 
     @Autowired
     private OrderServiceImpl orderService;
+
+    @Autowired
+    WalletService walletService;
 
 //    @Autowired
 //    private CouponService couponService;
@@ -206,7 +211,25 @@ public class ShoppingCartController {
 //            order.setPaymentMethod(paymentMethod);
             if ("payNow".equals(paymentMethod)){
                 order.setPaymentMethod("Razorpay");
-            }else {
+            }
+            else if ("Wallet".equalsIgnoreCase(paymentMethod)) {
+                // Add code for handling wallet payment
+                double amountInWallet = walletService.findSumOfWalletAmount(user.getId());
+                if (cart.getTotalPrice() <= amountInWallet) {
+                    // Wallet payment is possible
+                    // Insert debited entry in the wallet
+                    Wallet wallet = new Wallet();
+                    wallet.setUsersId(user.getId());
+                    wallet.setAmount(cart.getTotalPrice());
+                    wallet.setTransactionType(TransactionType.DEBITED);
+                    wallet.setUpdateOn(new Date());
+                    walletService.save(wallet);
+                } else {
+                    // Wallet balance is insufficient, switch to another payment method (e.g., COD)
+                    order.setPaymentMethod(paymentMethod); // Change to your desired fallback payment method
+                }
+            }
+            else {
                 order.setPaymentMethod(paymentMethod);
             }
             order.setOrderStatus("CONFIRMED");
